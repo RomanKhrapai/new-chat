@@ -4,7 +4,7 @@ import { GoogleAuthProvider,
     getAuth, signInWithPopup,
      signOut, onAuthStateChanged } from "firebase/auth";
 import {createButton} from '../pages/login.js';
-import {createChat,createTextMdg} from '../pages/chat.js';
+import {createChat, createTextMsg} from '../pages/chat.js';
 import { firebaseConfig} from "./const"
 
 
@@ -48,12 +48,12 @@ let user = true;
         });
       }
 
-      const starCountRef = ref(db, 'chat/' + postId + '/starCount');
+      const starCountRef = ref(db, 'chat/');
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
-        updateStarCount(postElement, data);
-        const markup = createTextMsg(Object.value(data),user.uid);
-        document.querySelector('>messages').innerHTML= markup;
+        //updateStarCount(postElement, data);
+        const markup = createTextMsg(Object.values(data),user.uid);
+        document.querySelector('.messages').innerHTML= markup;
         console.log(data);
       });
 

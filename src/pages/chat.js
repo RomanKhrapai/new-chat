@@ -32,7 +32,7 @@ export function createChat(){
     </div>
 </div>`);
 }
-export function createTextMdg(array,id){
+export function createTextMsg(array,id){
     const markup = array.map(({photoUrl,uid,message}) =>{
         const classElement = id===uid? "msg my": "msg";
 return `
