@@ -22,21 +22,25 @@ const auth = getAuth();
 const db = getDatabase();
 const rootRef = document.querySelector('#root');
 
-let user = true;
+let user = null;
 
-// function start(){
-    
-// if(user){
-//     rootRef.innerHTML = createChat();
-//     userSignOut()
-// }else{
-//     rootRef.innerHTML = createButton();
-//     onClickBtn();
-// }
-// }
-
-// start();
-
+onAuthStateChanged(auth, (userFireBase) => {
+    if(userFireBase){
+        const {photoURL,uid,displayName} = userFireBase
+        user={
+            photoURL,
+            uid,
+            displayName
+        }
+        
+        rootRef.innerHTML = createChat();
+        userSignOut()
+        createMsg()
+    }else{
+        rootRef.innerHTML = createButton();
+        onClickBtn();
+    }
+  });
 
     function sendMsg(value) {
         const time = Date.now();
@@ -51,28 +55,13 @@ let user = true;
       const starCountRef = ref(db, 'chat/');
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
-        //updateStarCount(postElement, data);
+        
         const markup = createTextMsg(Object.values(data),user.uid);
         document.querySelector('.messages').innerHTML= markup;
-        console.log(data);
+        
       });
 
-onAuthStateChanged(auth, (userFireBase) => {
-    if(userFireBase){
-        const {photoURL,uid} = userFireBase
-        user={
-            photoURL,
-            uid
-        }
-        console.log(user);
-        rootRef.innerHTML = createChat();
-        userSignOut()
-        createMsg()
-    }else{
-        rootRef.innerHTML = createButton();
-        onClickBtn();
-    }
-  });
+
 
 function createMsg(){
     
@@ -115,7 +104,6 @@ function onClickBtn(){
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      console.log(user)
     }).catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;

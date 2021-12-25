@@ -19,6 +19,7 @@ body {
   background: linear-gradient(to bottom, #272f3b 30%, transparent 80%);
   position: fixed;
   width: calc(100% - 4rem);
+  max-width:calc(1200px - 2rem);
   height: 6rem;
   color: #fff;
   z-index: 2;
@@ -60,13 +61,10 @@ body {
 .msg {
   margin: 0 30px 10px 0;    
   display: flex;
-  // align-items: flex-end;
-  // margin-bottom: 10px;
-  // float: left;
-  // display: block;
+ align-items: center;
   width: fit-content;
   padding: 10px 20px;
-  // margin-bottom: 10px;
+  
   background-color: rgb(123, 17, 155);
   border-radius: 20px;
   color: #fff;
@@ -129,11 +127,11 @@ body {
   cursor: pointer;
 }
 
-#root {
-  position: relative;
-  width: 100vw;
-  min-height: 100vh;
-}
+// #root {
+//   position: relative;
+//   width: 100vw;
+//   min-height: 100vh;
+// }
 
 .btn {
   position: absolute;
@@ -144,10 +142,13 @@ body {
 
 .img {
   border-radius: 50%;
-  margin: 10px;
+  margin: 0 10px auto;
 }
 .btn-sign-out{
   display: block;
   margin-bottom: 10px;
   margin-left: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
